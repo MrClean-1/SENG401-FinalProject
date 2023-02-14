@@ -9,5 +9,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="firebase-performance-compat" level="application" />
+    <orderEntry type="library" name="firebase-app-compat" level="application" />
+    <orderEntry type="library" name="firebase-auth-compat" level="application" />
+    <orderEntry type="library" name="firebase-firestore-compat" level="application" />
+    <orderEntry type="library" name="firebase-database-compat" level="application" />
+    <orderEntry type="library" name="firebase-functions-compat" level="application" />
+    <orderEntry type="library" name="firebase-messaging-compat" level="application" />
+    <orderEntry type="library" name="firebase-storage-compat" level="application" />
+    <orderEntry type="library" name="firebase-remote-config-compat" level="application" />
+    <orderEntry type="library" name="firebase-analytics-compat" level="application" />
   </component>
 </module>
