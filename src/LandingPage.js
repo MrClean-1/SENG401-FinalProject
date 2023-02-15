@@ -2,17 +2,17 @@ import './App.css';
 import React from "react";
 import 'firebase/firestore';
 
-class TestComponent extends React.Component {
+class LandingPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {testVar: "The value of the test variable is this!!"}
+        this.state = {testVar: "Another value of a variable here"}
     }
 
     render() {
         return(
             <div>
                 <h1>
-                    You should only see this when in /test
+                    You should see this page from the front of the site!
                 </h1>
                 {this.state.testVar}
             </div>
@@ -20,4 +20,4 @@ class TestComponent extends React.Component {
     }
 }
 
-export default TestComponent;
+export default LandingPage;
