@@ -2,17 +2,17 @@ import './App.css';
 import React from "react";
 import 'firebase/firestore';
 
-class LandingPage extends React.Component {
+class NewsAndAbout extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {testVar: "Another value of a variable here"}
+        this.state = {testVar: "You should see this page when you're logged in"}
     }
 
     render() {
         return(
             <div>
                 <h1>
-                    You should see this page from the front of the site!
+                    Welcome to the Garden! This is the News and About page
                 </h1>
                 {this.state.testVar}
             </div>
@@ -20,4 +20,4 @@ class LandingPage extends React.Component {
     }
 }
 
-export default LandingPage;
+export default NewsAndAbout;

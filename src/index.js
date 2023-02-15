@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import TestComponent from "./TestComponent";
-import LandingPage from "./LandingPage";
+import NewsAndAbout from "./NewsAndAbout";
 import {
     createBrowserRouter,
     RouterProvider,
@@ -11,7 +11,7 @@ import {
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LandingPage />,
+        element: <NewsAndAbout />,
         // loader: rootLoader,
     },
     {
