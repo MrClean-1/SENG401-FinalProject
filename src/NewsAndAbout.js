@@ -14,20 +14,17 @@ class NewsAndAbout extends React.Component {
                 <h1 style = {{textAlign: "center"}}>
                     Welcome to Digital Flora!
                 </h1>
-                <h2 style = {{textAlign: "center"}}>
-                    ABOUT
-                </h2>
                 <p style = {{textAlign: "center"}}>
-                    Digital Flora aims to promote mental health and a safe space creating a network of supportive plant growers.
-                    Join our community where you can water and watch your plant grow and flourish while befriending other users on our discussion board.
+                    A safe place to grow plants and interact interact with others
                 </p>
                 <h3>
                     HOW TO PLAY
                 </h3>
                 <p>
-                    Register and get your first seedling! Take some time out of your day to water your plant and take a breather while it's being watered.
-                    You can water it up to every 30 minutes for faster growth, but if your plant has not been watered for more than 48 hours, it begins to wilt
-                    and dies a little. :(
+                    1. Using Flora coins, buy a seedling. You can buy and take care of up to three plants.<br/>
+                    2. Water your seedling within 48 hours. Every time you water your plants, you can earn coins.<br/>
+                    3. Once it’s at full growth, you can trade your plant with others or add it to your garden collection.<br/>
+                    4. Use the Discussion Board to talk with other users or answer the Daily Wellness prompt.
                 </p>
                 {this.state.testVar}
             </div>
