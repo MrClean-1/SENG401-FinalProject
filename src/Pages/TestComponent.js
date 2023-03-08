@@ -1,7 +1,7 @@
-import './App.css';
+import '../App.css';
 import React from "react";
 import 'firebase/firestore';
-import FirebaseFirestoreDEMO from'./FirebaseFirestoreDEMO'
+import FirebaseFirestoreDEMO from '../Database/FirebaseFirestoreDEMO'
 
 class TestComponent extends React.Component {
     constructor(props) {
