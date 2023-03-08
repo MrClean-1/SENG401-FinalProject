@@ -1,6 +1,7 @@
 import './App.css';
 import React from "react";
 import 'firebase/firestore';
+import Header from "./Header";
 
 class NewsAndAbout extends React.Component {
     constructor(props) {
@@ -10,11 +11,12 @@ class NewsAndAbout extends React.Component {
 
     render() {
         return(
-            <div>
-                <h1 style = {{textAlign: "center"}}>
+            <div style = {{textAlign: "center"}}>
+                <Header/>
+                <h1>
                     Welcome to Digital Flora!
                 </h1>
-                <p style = {{textAlign: "center"}}>
+                <p>
                     A safe place to grow plants and interact interact with others
                 </p>
                 <h3>

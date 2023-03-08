@@ -1,3 +1,5 @@
+import db from "../firebase_init";
+
 const gardenList = document.querySelector('#garden-list');
 const form = document.querySelector('#add-garden-form');
 
