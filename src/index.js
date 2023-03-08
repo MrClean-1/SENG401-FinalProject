@@ -1,29 +1,23 @@
-import React from 'react';
+import React, {StrictMode} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import TestComponent from "./TestComponent";
-import NewsAndAbout from "./NewsAndAbout";
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from "react-router-dom";
+import {router} from './App.js'
+import {RouterProvider} from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <NewsAndAbout />,
-        // loader: rootLoader,
-    },
-    {
-        path: "/test",
-        element: <TestComponent />,
-        // loader: rootLoader,
-    },
-]);
+const theme = createTheme({
+    palette: {
+        primary: { main: "#3a34d2" }
+    }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <RouterProvider router={router} />
+    <StrictMode>
+        <ThemeProvider theme={theme}>
+            <RouterProvider router={router} />
+        </ThemeProvider>
+    </StrictMode>
 );
 
 // // If you want to start measuring performance in your app, pass a function
