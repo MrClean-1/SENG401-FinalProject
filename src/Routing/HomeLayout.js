@@ -7,7 +7,7 @@ export const HomeLayout = () => {
     const outlet = useOutlet();
 
     if (user) {
-        return <Navigate to="/dashboard/garden" replace />;
+        return <Navigate to="/dashboard/about" replace />;
     }
 
     return (

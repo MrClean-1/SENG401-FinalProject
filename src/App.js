@@ -6,8 +6,8 @@ import {AuthLayout} from "./Routing/AuthLayout";
 import NewsAndAbout from "./Pages/NewsAndAbout";
 import {LoginPage} from "./Pages/LoginPage";
 import {RegisterPage} from "./Pages/RegisterPage";
-import {BasicPage} from "./Routing/BasicPage";
 import {GardenPage} from "./Pages/GardenPage";
+import {DiscussionPage} from "./Pages/DiscussionPage";
 
 //TODO
 // - this should be an API call to get the logged in user's data
@@ -31,7 +31,8 @@ export const router = createBrowserRouter(
             </Route>
 
             <Route path="/dashboard" element={<ProtectedLayout />}>
-                <Route path="discussion" element={<BasicPage />} />
+                <Route path="about" element={<NewsAndAbout />} />
+                <Route path="discussion" element={<DiscussionPage />} />
                 <Route path="garden" element={<GardenPage />} />
             </Route>
         </Route>
