@@ -7,9 +7,14 @@ const salt = bcrypt.genSaltSync(10);
 
 
 export async function addUser(username, password) {
-    const hash = bcrypt.hashSync(password, salt);
     const ref = doc(db, "users", username).withConverter(userConverter);
-    await setDoc(ref, new User(username, hash));
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+        alert("Email already in use. (Did you mean to login??)")
+    }else{
+        const hash = bcrypt.hashSync(password, salt);
+        await setDoc(ref, new User(username, hash));
+    }
 }
 
 export async function getUser(username, password) {
@@ -18,7 +23,6 @@ export async function getUser(username, password) {
     if (docSnap.exists()) {
         // Convert to User object
         const user = docSnap.data();
-        console.log("Doc found with username:" + user.username + ", and hash: " + user.hash);
         // Use a User instance method
         return bcrypt.compareSync(password, user.hash);
     } else {
