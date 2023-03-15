@@ -15,6 +15,7 @@ export const AuthProvider = ({ children, userData }) => {
             navigate("/dashboard/about", { replace: true });
         }else {
             setUser(null);
+            alert("Incorrect Username or Password")
         }
     };
 
