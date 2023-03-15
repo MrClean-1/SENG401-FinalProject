@@ -23,7 +23,7 @@ export async function getUser(username, password) {
     if (docSnap.exists()) {
         // Convert to User object
         const user = docSnap.data();
-        // Use a User instance method
+        // Compare the user instance we just created with the password we have been given
         return bcrypt.compareSync(password, user.hash);
     } else {
         console.log("No such document!");
