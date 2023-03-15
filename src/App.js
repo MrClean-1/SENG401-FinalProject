@@ -8,7 +8,6 @@ import {LoginPage} from "./Pages/LoginPage";
 import {RegisterPage} from "./Pages/RegisterPage";
 import {GardenPage} from "./Pages/GardenPage";
 import {DiscussionPage} from "./Pages/DiscussionPage";
-import {getUser, addUser} from './Database/DatabaseMethods.js';
 
 //TODO
 // - this should be an API call to get the logged in user's data

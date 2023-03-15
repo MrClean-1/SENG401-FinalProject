@@ -1,10 +1,7 @@
 export class User {
-    constructor(username, password) {
+    constructor(username, hash) {
         this.username = username;
-        this.password = password;
-    }
-    toString(){
-        return this.username + ', ' + this.password;
+        this.hash = hash;
     }
 }
 
@@ -12,11 +9,11 @@ export const userConverter = {
     toFirestore: (user) => {
         return {
             username: user.username,
-            password: user.password
+            hash: user.hash
         };
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new User(data.username, data.password);
+        return new User(data.username, data.hash);
     }
 };
