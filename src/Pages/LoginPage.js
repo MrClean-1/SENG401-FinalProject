@@ -11,7 +11,6 @@ import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
 import {useAuth} from "../hooks/useAuth";
 
-
 export const LoginPage = () => {
     const { login } = useAuth();
 

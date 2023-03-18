@@ -9,8 +9,6 @@ import {RegisterPage} from "./Pages/RegisterPage";
 import {GardenPage} from "./Pages/GardenPage";
 import {DiscussionPage} from "./Pages/DiscussionPage";
 
-//TODO
-// - this should be an API call to get the logged in user's data
 const getUserData = () =>
     new Promise((resolve) =>
         setTimeout(() => {
