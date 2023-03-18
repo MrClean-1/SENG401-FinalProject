@@ -1,6 +1,37 @@
-import {BasicPage} from "../Routing/BasicPage";
-import {Forest} from "@mui/icons-material";
+import Button from "@mui/material/Button";
 
 export const GardenPage = () => {
-    return <BasicPage title="Garden Page" icon={<Forest />} />;
+    const handleAddPlant = (e) => {
+        e.preventDefault();
+    }
+    const handleWater = (e) =>{
+        e.preventDefault();
+    }
+
+    return (
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+        >
+            <Button onAddPlant={handleAddPlant} >
+                Add Plant
+            </Button>
+
+            <Button onWaterP1={handleWater} >
+                Water
+            </Button>
+
+            <Button onWaterP2={handleWater} >
+                Water
+            </Button>
+
+            <Button onWaterP3={handleWater} >
+                Water
+            </Button>
+        </div>
+    )
 };
+
