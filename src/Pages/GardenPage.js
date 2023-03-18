@@ -9,29 +9,38 @@ export const GardenPage = () => {
     }
 
     return (
+        <>
         <div
             style={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center"
             }}
         >
-            <Button onAddPlant={handleAddPlant} >
+            <Button onAddPlant={handleAddPlant}>
                 Add Plant
             </Button>
-
-            <Button onWaterP1={handleWater} >
-                Water
-            </Button>
-
-            <Button onWaterP2={handleWater} >
-                Water
-            </Button>
-
-            <Button onWaterP3={handleWater} >
-                Water
-            </Button>
         </div>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "baseline"
+                }}
+            >
+                <Button onWaterP1={handleWater} >
+                Water
+                </Button>
+
+                <Button onWaterP2={handleWater} >
+                    Water
+                </Button>
+
+                <Button onWaterP3={handleWater} >
+                    Water
+                </Button>
+            </div>
+        </>
     )
 };
 
