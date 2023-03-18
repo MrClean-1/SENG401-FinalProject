@@ -28,16 +28,8 @@ export const GardenPage = () => {
                     alignItems: "baseline"
                 }}
             >
-                <Button onWaterP1={handleWater} >
-                Water
-                </Button>
-
-                <Button onWaterP2={handleWater} >
-                    Water
-                </Button>
-
-                <Button onWaterP3={handleWater} >
-                    Water
+                <Button onWaterAll={handleWater} >
+                Water All
                 </Button>
             </div>
         </>
