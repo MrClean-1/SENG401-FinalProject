@@ -1,7 +1,9 @@
 import db from './firebase_init'
 import { doc, setDoc, getDoc} from "firebase/firestore";
-import { User, userConverter} from '../Models/UserCustomObject.js'
+import { User, userConverter} from '../Models/UserCustomObject.js';
 import {Garden, gardenConverter} from "../Models/GardenCustomObject";
+import {Plant, plantConverter} from "../Models/Plant.js";
+
 
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
@@ -10,6 +12,7 @@ export async function addUser(username, password) {
     const userRef = doc(db, "users", username).withConverter(userConverter);
     const userDocumentSnapshot = await getDoc(userRef);
     const gardenRef = doc(db, "gardens", username).withConverter(gardenConverter);
+    const plantRef = doc(db, "plants", username).withConverter(plantConverter);
 
     if (userDocumentSnapshot.exists()) {
         alert("Email already in use. (Did you mean to login??)")
@@ -17,6 +20,7 @@ export async function addUser(username, password) {
         const hash = bcrypt.hashSync(password, salt);
         await setDoc(userRef, new User(username, hash));
         await setDoc(gardenRef, new Garden(username, 0));
+        await setDoc(plantRef, new Plant(username));
     }
 }
 
