@@ -38,19 +38,3 @@ export async function getUser(username, password) {
         return false;
     }
 }
-
-// Idk how to get value of gold w/ the given username
-export async function getGold(username) {
-    const ref = doc(db, "gardens", username).withConverter(gardenConverter);
-    const docSnap = await getDoc(ref);
-
-    if (docSnap.exists()) {
-        // Convert to garden object
-        const garden = docSnap.data();
-        // Returns the number of gold the user has
-        return garden.gold;
-    } else {
-        console.log("No such document!");
-        return null;
-    }
-}

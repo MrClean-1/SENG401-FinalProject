@@ -1,9 +1,6 @@
 import Button from "@mui/material/Button";
-import React from "react";
-import {getGold} from "../Database/DatabaseMethods";
 
 export const GardenPage = () => {
-    const gold = getGold
     const handleAddPlant = (e) => {
         e.preventDefault();
     }
@@ -27,17 +24,14 @@ export const GardenPage = () => {
             <div
                 style={{
                     display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center"
+                    justifyContent: "center",
+                    alignItems: "baseline"
                 }}
             >
                 <Button onWaterAll={handleWater} >
                 Water All
                 </Button>
             </div>
-                <div>
-                    <p>Gold: {getGold} </p>
-                </div>
         </>
     )
 };
