@@ -18,7 +18,7 @@ export const LoginPage = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         login({
-            email: data.get("email"),
+            username: data.get("username"),
             password: data.get("password")
         });
     };
@@ -44,10 +44,10 @@ export const LoginPage = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
+                        id="username"
                         label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        name="username"
+                        autoComplete="username"
                         autoFocus
                     />
                     <TextField

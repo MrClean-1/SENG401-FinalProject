@@ -1,25 +1,31 @@
 export class Plant {
-    constructor(username) {
-        const types = ["Rose", "Lilly", "Orchid", "Sunflower"];
-        const rewards = [100, 200, 300, 400, 500];
+    types = ["Rose", "Lilly", "Orchid", "Sunflower"];
+    rewards = [100, 200, 300, 400, 500];
+
+    // This constructor uses default values so that we can specify either only username (for a new Plant)
+    // or we can specify all options when creating a Plant instance from the firebase DB
+    constructor(username, condition = "Alive and Healthy", stage = 0,
+                type = this.types[Math.floor(Math.random() * this.types.length)],
+                expiration = new Date.now(), age = new Date.now(),
+                reward = this.rewards[Math.floor(Math.random() * this.rewards.length)]) {
 
         this.username = username;
-        this.condition = "Alive and Healthy";
-        this.stage = 0;
-        this.type = types[Math.floor(Math.random() * types.length)];
-        this.expiration = new Date();
-        this.age = new Date();
-        this.reward = rewards[Math.floor(Math.random() * rewards.length)];
+        this.condition = condition;
+        this.stage = stage;
+        this.type = type;
+        this.expiration = expiration;
+        this.age = age;
+        this.reward = reward;
     }
 
     lifeCheck(){
-        const currentDate = new Date();
+        const currentDate = new Date.now();
         const diffExp = Math.abs(currentDate - this.expiration);
         const expDays = Math.ceil(diffExp / (1000 * 60 * 60 * 24));
         const diffAge = Math.abs(currentDate - this.age);
         const ageDays = Math.ceil(diffAge / (1000 * 60 * 60 * 24));
 
-        if (diffExp < 3){
+        if (expDays < 3){
             if(ageDays > 3 && ageDays < 6) {
                 this.stage = 1;
                 return true
@@ -40,7 +46,7 @@ export class Plant {
     }
 
     water(){
-        if (lifeCheck()){
+        if (this.lifeCheck()){
             this.expiration = new Date();
             return this.reward;
         }
@@ -62,11 +68,10 @@ export const plantConverter = {
             expiration: plant.expiration,
             age: plant.age,
             reward: plant.reward
-
         };
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new Plant(data.username);
+        return new Plant(data.username, data.condition, data.stage, data.type, data.expiration, data.age, data.reward);
     }
 };

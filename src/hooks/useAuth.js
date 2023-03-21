@@ -6,12 +6,12 @@ import { getUser, addUser} from "../Database/DatabaseMethods";
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children, userData }) => {
-    const [user, setUser] = useLocalStorage('user', userData);
+    const [user, setUser] = useLocalStorage('user', userData.username);
     const navigate = useNavigate();
 
     const login = async (data) => {
-        if(await getUser(data.email, data.password)){
-            setUser(data);
+        if(await getUser(data.username, data.password)){
+            setUser(data.username);
             navigate("/dashboard/about", { replace: true });
         }else {
             setUser(null);
@@ -20,8 +20,8 @@ export const AuthProvider = ({ children, userData }) => {
     };
 
     const register = async (data) => {
-        await addUser(data.email, data.password)
-        setUser(data);
+        await addUser(data.username, data.password)
+        setUser(data.username);
         navigate("/dashboard/about", { replace: true });
     };
 

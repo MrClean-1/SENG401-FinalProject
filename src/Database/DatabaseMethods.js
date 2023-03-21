@@ -39,9 +39,14 @@ export async function getUser(username, password) {
     }
 }
 
+const getUsername = () => {
+    const user = window.localStorage.getItem("user");
+    return JSON.parse(user)
+}
+
 // Idk how to get value of gold w/ the given username
-export async function getGold(username) {
-    const ref = doc(db, "gardens", username).withConverter(gardenConverter);
+export async function getGold() {
+    const ref = doc(db, "gardens", getUsername()).withConverter(gardenConverter);
     const docSnap = await getDoc(ref);
 
     if (docSnap.exists()) {

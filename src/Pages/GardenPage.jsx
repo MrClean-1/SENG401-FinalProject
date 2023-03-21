@@ -1,9 +1,21 @@
 import Button from "@mui/material/Button";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {getGold} from "../Database/DatabaseMethods";
 
 export const GardenPage = () => {
-    const gold = getGold
+    const [gold, setGold] = useState([]);
+
+    useEffect( () => {
+        async function fetchData() {
+            try {
+                setGold(await getGold())
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
+
     const handleAddPlant = (e) => {
         e.preventDefault();
     }
@@ -20,7 +32,7 @@ export const GardenPage = () => {
                 alignItems: "center"
             }}
         >
-            <Button onAddPlant={handleAddPlant}>
+            <Button onClick={handleAddPlant}>
                 Add Plant
             </Button>
         </div>
@@ -31,12 +43,12 @@ export const GardenPage = () => {
                     alignItems: "center"
                 }}
             >
-                <Button onWaterAll={handleWater} >
+                <Button onClick={handleWater} >
                 Water All
                 </Button>
             </div>
                 <div>
-                    <p>Gold: {getGold} </p>
+                    <h4>Gold: {gold} </h4>
                 </div>
         </>
     )
