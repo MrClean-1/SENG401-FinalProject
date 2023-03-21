@@ -22,6 +22,7 @@ class PostEditor extends Component {
     createPost() {
         this.props.addPost(this.state.newPostBody);
         this.setState({
+            subject: '',
             newPostBody: '',
         });
     }
