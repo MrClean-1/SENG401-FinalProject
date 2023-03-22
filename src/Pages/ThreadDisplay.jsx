@@ -31,12 +31,6 @@ class ThreadDisplay extends Component {
     }
 
     updateLocalState(postList) {
-        // const posts = [];
-        // postList.forEach((post) => {
-        //     // const brokenDownPostBody = post.body.split(/[\r\n]/g);
-        //     posts.push(post);
-        // });
-
         this.setState({
             posts: postList,
         });

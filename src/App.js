@@ -14,7 +14,7 @@ const getUserData = () =>
         setTimeout(() => {
             const user = window.localStorage.getItem("user");
             resolve(user);
-        }, 3000)
+        }, 0)
     );
 export const router = createBrowserRouter(
     createRoutesFromElements(

@@ -39,7 +39,7 @@ class PostEditor extends Component {
         return (
             <div className="panel panel-default post-editor">
                 <div className="post-editor-space"/>
-                <h2 className="post-editor-text">{'Create a new post below'}</h2>
+                <h3 className="post-editor-text">{'Create a new post below'}</h3>
                 <label className="post-editor-text">{'Subject'}</label>
                 <div className="panel-subject">
                     <textarea className="form-control post-editor-subject" rows={1} maxLength={30} value={this.state.subject} onChange={this.handleSubjectEditorInputChange} />
