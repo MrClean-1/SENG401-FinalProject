@@ -108,20 +108,15 @@ export async function plantsList(){
 export async function addPlant(){
     const garden = getGarden();
     // make some checks to verify the user should be able to purchase a plant
-    if(garden.plants == null){
-
+    if(garden.plants.length < 3 && garden.gold >= 1000){
+        garden.gold -=1000;
+        const newPlantRef = doc(collection(db, "plants").withConverter(plantConverter));
+        const newPlant = new Plant(newPlantRef.id)
+        await setDoc(newPlantRef, newPlant);
+        garden.plants.push(newPlantRef.id);
     }else{
-        if(garden.plants.length < 3 && garden.gold >= 1000){
-            garden.gold -=1000;
-            const newPlantRef = doc(collection(db, "plants").withConverter(plantConverter));
-            const newPlant = new Plant(newPlantRef.id)
-            await setDoc(newPlantRef, newPlant);
-            garden.plants.push(newPlantRef.id);
-        }else{
-            console.log("User has too many plants already or is too poor (hehehe poor moment) ")
-        }
+        console.log("User has too many plants already or is too poor (hehehe poor moment) ")
     }
-
 }
 
 export async function waterPlants(){
