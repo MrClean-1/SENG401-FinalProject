@@ -1,9 +1,11 @@
 import Button from "@mui/material/Button";
 import React, {useEffect, useState} from "react";
 import {getGold} from "../Database/DatabaseMethods";
+// will have to make a setImg function in DatavbaseMethods
 
 export const GardenPage = () => {
     const [gold, setGold] = useState([]);
+//    const [img, setImg] = useState([]);
 
     useEffect( () => {
         async function fetchData() {
@@ -16,7 +18,17 @@ export const GardenPage = () => {
         fetchData();
     }, []);
 
-
+    // Need to write getImg()
+    // useEffect( () => {
+    //     async function fetchImg() {
+    //         try {
+    //             setImg(await getImg())
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    //     fetchImg();
+    // }, []);
 
     const handleAddPlant = (e) => {
         e.preventDefault();
@@ -58,6 +70,17 @@ export const GardenPage = () => {
                     Water All
                     </Button>
                 </div>
+                    {/*<div*/}
+                    {/*    style={{*/}
+                    {/*        display: "flex",*/}
+                    {/*        justifyContent: "center",*/}
+                    {/*        alignItems: "center"*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    <h4>Plant 1 {img}</h4>*/}
+                    {/*    <h4>Plant 1 {img}</h4>*/}
+                    {/*    <h4>Plant 1 {img}</h4>*/}
+                    {/*</div>*/}
         </>
     )
 };
