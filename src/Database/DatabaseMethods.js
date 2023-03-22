@@ -1,8 +1,9 @@
 import db from './firebase_init'
-import { doc, setDoc, getDoc} from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, collection} from "firebase/firestore";
 import { User, userConverter} from '../Models/UserCustomObject.js';
 import {Garden, gardenConverter} from "../Models/GardenCustomObject";
 import {Plant, plantConverter} from "../Models/Plant.js";
+import {DiscussionPost, postConverter} from "../Models/PostCustomObject";
 
 
 const bcrypt = require('bcryptjs');
@@ -58,4 +59,21 @@ export async function getGold() {
         console.log("No such document!");
         return null;
     }
+}
+
+export async function getPosts() {
+    const querySnapshot = await getDocs(collection(db, "discussion").withConverter(postConverter));
+    let postList = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        postList.push(doc.data());
+    });
+    return postList;
+}
+
+export async function addPost(subject, body) {
+    const newPostRef = doc(collection(db, "discussion").withConverter(postConverter));
+    const newPost = new DiscussionPost(getUsername(), subject, body);
+    await setDoc(newPostRef, newPost);
+    return newPost;
 }

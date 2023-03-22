@@ -17,7 +17,6 @@ export const ProtectedLayout = () => {
                     { label: "News & About", path: "about" },
                     { label: "Garden", path: "garden" },
                     { label: "Discussion", path: "discussion" },
-                    { label: "New Post", path: "newPost" }
                 ]}
             />
             {outlet}

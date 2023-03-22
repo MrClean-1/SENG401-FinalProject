@@ -8,7 +8,6 @@ import {LoginPage} from "./Pages/LoginPage";
 import {RegisterPage} from "./Pages/RegisterPage";
 import {GardenPage} from "./Pages/GardenPage";
 import {DiscussionPage} from "./Pages/DiscussionPage";
-import {NewPostPage} from "./Pages/NewPostPage";
 
 const getUserData = () =>
     new Promise((resolve) =>
@@ -32,7 +31,6 @@ export const router = createBrowserRouter(
             <Route path="/dashboard" element={<ProtectedLayout />}>
                 <Route path="about" element={<NewsAndAbout />} />
                 <Route path="discussion" element={<DiscussionPage />} />
-                <Route path="newPost" element={<NewPostPage/>} />
                 <Route path="garden" element={<GardenPage />} />
             </Route>
         </Route>
