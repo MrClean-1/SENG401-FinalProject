@@ -16,6 +16,8 @@ export const GardenPage = () => {
         fetchData();
     }, []);
 
+
+
     const handleAddPlant = (e) => {
         e.preventDefault();
     }
@@ -32,23 +34,29 @@ export const GardenPage = () => {
                 alignItems: "center"
             }}
         >
+            <h4>Gold: {gold} </h4>
+        </div>
+            <div
+            style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center"
+            }}
+        >
             <Button onClick={handleAddPlant}>
                 Add Plant
             </Button>
-        </div>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center"
-                }}
-            >
-                <Button onClick={handleWater} >
-                Water All
-                </Button>
             </div>
-                <div>
-                    <h4>Gold: {gold} </h4>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center"
+                    }}
+                >
+                    <Button onClick={handleWater} >
+                    Water All
+                    </Button>
                 </div>
         </>
     )
