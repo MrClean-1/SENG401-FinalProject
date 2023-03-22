@@ -59,3 +59,41 @@ export async function getGold() {
         return null;
     }
 }
+
+export async function getGarden() {
+    const ref = doc(db, "gardens", getUsername()).withConverter(gardenConverter);
+    const docSnap = await getDoc(ref);
+
+    if (docSnap.exists()) {
+        // Convert to garden object
+        const garden = docSnap.data();
+        // Returns the garden
+        return garden;
+    } else {
+        console.log("No such document!");
+        return null;
+    }
+}
+
+
+export async function getPlants(username){
+    // Create an empty array to store plants
+    const plants = [];
+
+    for (const plant of garden.plant){
+        const ref = doc(db, "gardens", plant).withConverter(gardenConverter);
+        const docSnap = await getDoc(ref);
+
+        if (docSnap.exists()) {
+            // Convert to garden object
+            const plant = docSnap.data();
+            plants.push(plant);
+        }
+        else {
+            console.log("No such document!");
+            return null;
+        }
+    }
+    return plants;
+}
+
