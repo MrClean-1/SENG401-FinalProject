@@ -18,7 +18,7 @@ export const RegisterPage = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         register({
-            email: data.get("email"),
+            username: data.get("username"),
             password: data.get("password")
         });
     };
@@ -44,10 +44,10 @@ export const RegisterPage = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
                         autoFocus
                     />
                     <TextField

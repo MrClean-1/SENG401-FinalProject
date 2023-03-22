@@ -20,7 +20,8 @@ export const AuthProvider = ({ children, userData }) => {
     };
 
     const register = async (data) => {
-        await addUser(data.username, data.password)
+        await addUser(await data.username, await data.password)
+        console.log("done waiting for addUser()")
         setUser(data.username);
         navigate("/dashboard/about", { replace: true });
     };

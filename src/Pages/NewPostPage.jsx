@@ -1,4 +1,4 @@
-import PostEditor from "../src/PostEditor/components/PostEditor";
+import PostEditor from "./PostEditor";
 import React from "react";
 
 export const NewPostPage = () => {
