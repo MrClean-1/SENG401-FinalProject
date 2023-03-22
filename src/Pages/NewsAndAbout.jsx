@@ -3,10 +3,10 @@ import React from "react";
 import 'firebase/firestore';
 
 class NewsAndAbout extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {testVar: "You should see this page when you're logged in"}
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {testVar: "You should see this page when you're logged in"}
+    // }
 
     render() {
         return(
@@ -26,7 +26,6 @@ class NewsAndAbout extends React.Component {
                     3. Once it’s at full growth, you can trade your plant with others or add it to your garden collection.<br/>
                     4. Use the Discussion Board to talk with other users or answer the Daily Wellness prompt.
                 </p>
-                {this.state.testVar}
             </div>
         )
     }
