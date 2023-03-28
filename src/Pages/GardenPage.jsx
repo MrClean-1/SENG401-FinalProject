@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {getGold} from "../Database/DatabaseMethods";
+import {addPlant, getGold, waterPlants} from "../Database/DatabaseMethods";
 import Button from "@mui/material/Button";
-// will have to make a setImg function in DatavbaseMethods
+// will have to make a setImg function in DatabaseMethods
 
 export const GardenPage = () => {
     const [gold, setGold] = useState([]);
@@ -33,13 +33,11 @@ export const GardenPage = () => {
 
     const handleAddPlant = (e) => {
         e.preventDefault();
-        // const pl = new FormData(e.currentTarget);
-        // plantAddition({
-        //
-        // });
+        addPlant()
     };
     const handleWater = (e) =>{
         e.preventDefault();
+        waterPlants();
     }
 
     return (
