@@ -52,7 +52,7 @@ const getUsername = () => {
 
 // Idk how to get value of gold w/ the given username
 export async function getGold() {
-    const ref = doc(collection(db, "gardens", getUsername()).withConverter(gardenConverter));
+    const ref = doc(db, "gardens", getUsername()).withConverter(gardenConverter);
     const docSnap = await getDoc(ref);
 
     if (docSnap.exists()) {
