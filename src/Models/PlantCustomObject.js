@@ -32,15 +32,15 @@ export class Plant {
 
         if (expDays < 3){
             if(ageDays > 3 && ageDays < 6) {
-                this.stage = 2;
+                this.stage = 1;
                 return true
             }
             else if(ageDays >= 6 && ageDays < 9){
-                this.stage = 3;
+                this.stage = 2;
                 return true;
             }
             else {
-                this.stage = 4;
+                this.stage = 3;
                 return true;
             }
         }
