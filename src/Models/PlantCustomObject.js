@@ -1,5 +1,5 @@
 export class Plant {
-    types = ["Rose", "Lilly", "Orchid", "Sunflower"];
+    types = ["Blue Iris", "Shishito Pepper", "Pink Foxglove", "Himalayan Blue Poppy", "Pink Lotus", "Yellow Moss Sorrel", "Wild Arum", "Tiger Lily"];
     rewards = [100, 200, 300, 400, 500];
 
     // This constructor uses default values so that we can specify either only username (for a new Plant)
@@ -32,15 +32,15 @@ export class Plant {
 
         if (expDays < 3){
             if(ageDays > 3 && ageDays < 6) {
-                this.stage = 1;
+                this.stage = 2;
                 return true
             }
             else if(ageDays >= 6 && ageDays < 9){
-                this.stage = 2;
+                this.stage = 3;
                 return true;
             }
             else {
-                this.stage = 3;
+                this.stage = 4;
                 return true;
             }
         }
@@ -59,7 +59,6 @@ export class Plant {
         else {
             return 0;
         }
-
     }
 }
 

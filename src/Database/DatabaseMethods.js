@@ -86,7 +86,7 @@ export async function addPost(subject, body) {
 export async function plantsList(){
     let plantList = [];
     // get the garden object
-    const garden = getGarden();
+    const garden = await getGarden();
     // gets the plant list from the garden
     if (garden == null){
         return null;
@@ -106,7 +106,7 @@ export async function plantsList(){
 }
 
 export async function addPlant(){
-    const garden = getGarden();
+    const garden = await getGarden();
     // make some checks to verify the user should be able to purchase a plant
     if(garden.plants.length < 3 && garden.gold >= 1000){
         garden.gold -=1000;
@@ -114,18 +114,21 @@ export async function addPlant(){
         const newPlant = new Plant(newPlantRef.id)
         await setDoc(newPlantRef, newPlant);
         garden.plants.push(newPlantRef.id);
+        await setGarden(garden);
     }else{
         console.log("User has too many plants already or is too poor (hehehe poor moment) ")
     }
 }
 
 export async function waterPlants(){
-    const plantList = plantsList();
+    const plantList = await plantsList();
+    const garden = await getGarden();
     for(const plant of plantList){
-        plant.water()
+        garden.gold += plant.water()
         const plantRef = doc(db, "plants", plant.id).withConverter(plantConverter);
         await setDoc(plantRef, plant);
     }
+    await setGarden(garden);
 }
 
 export async function getGarden(){
@@ -138,4 +141,9 @@ export async function getGarden(){
         console.log("No such document! (getGarden)");
         return null;
     }
+}
+
+export async function setGarden(garden){
+    const updateGardenRef = doc(db, "gardens", getUsername()).withConverter(gardenConverter);
+    await setDoc(updateGardenRef, garden);
 }
