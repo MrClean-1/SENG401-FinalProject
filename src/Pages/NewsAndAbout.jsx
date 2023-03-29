@@ -10,7 +10,7 @@ class NewsAndAbout extends React.Component {
                     Welcome to Digital Flora!
                 </h1>
                 <p>
-                    A safe place to grow plants and interact interact with others
+                    A safe place to grow plants and interact with others
                 </p>
                 <h3>
                     HOW TO PLAY
