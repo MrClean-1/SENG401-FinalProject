@@ -77,7 +77,7 @@ export async function getPosts() {
 }
 
 export async function addPost(subject, body) {
-    const newPostRef = doc(db, "discussion").withConverter(postConverter);
+    const newPostRef = doc(collection(db, "discussion").withConverter(postConverter));
     const newPost = new DiscussionPost(getUsername(), subject, body);
     await setDoc(newPostRef, newPost);
     return newPost;
@@ -105,7 +105,7 @@ export async function plantsList(){
     return plantList
 }
 
-export async function addPlant(){
+export async function addPlant(onlyPlantIsDead = false){
     const garden = await getGarden();
     // make some checks to verify the user should be able to purchase a plant
     if(garden.plants.length < 3 && garden.gold >= 1000){
@@ -115,8 +115,13 @@ export async function addPlant(){
         await setDoc(newPlantRef, newPlant);
         garden.plants.push(newPlantRef.id);
         await setGarden(garden);
+    }else if(onlyPlantIsDead){
+        // the user has killed their only plant, and cannot afford a new one, we let them afford a new one
+        garden.gold = 1000;
+        await setGarden(garden);
+        await addPlant()
     }else{
-        console.log("User has too many plants already or is too poor (hehehe poor moment) ")
+            console.log("User has too many plants already or is too poor (hehehe poor moment) ")
     }
 }
 

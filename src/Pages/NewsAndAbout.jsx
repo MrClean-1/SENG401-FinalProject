@@ -16,10 +16,11 @@ class NewsAndAbout extends React.Component {
                     HOW TO PLAY
                 </h3>
                 <p>
-                    1. Using Flora coins, buy a seedling. You can buy and take care of up to three plants.<br/>
-                    2. Water your seedling within 48 hours. Every time you water your plants, you can earn coins.<br/>
-                    3. Once it’s at full growth, you can trade your plant with others or add it to your garden collection.<br/>
-                    4. Use the Discussion Board to talk with other users or answer the Daily Wellness prompt.
+                    1. Using gold, buy a seedling (you will start with one).<br/>
+                    2. You can purchase and take care of up to three plants.<br/>
+                    3. You can water your plants every 2 hours, and you will earn gold. <br/>
+                    4. If a plant isn't watered in more than 72 hours it will die. <br/>
+                    5. Use the Discussion Board to talk with other users and make posts.<br/>
                 </p>
             </div>
         )
