@@ -121,7 +121,7 @@ export async function addPlant(onlyPlantIsDead = false){
         await setGarden(garden);
         await addPlant()
     }else{
-            console.log("User has too many plants already or is too poor (hehehe poor moment) ")
+            alert("User has too many plants already or is too poor (hehehe poor moment) ")
     }
 }
 
