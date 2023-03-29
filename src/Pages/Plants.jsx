@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './styles/Plant.css'
-import {plantsList, removePlant} from "../Database/DatabaseMethods";
+import {addPlant, plantsList, removePlant} from "../Database/DatabaseMethods";
 import Button from "@mui/material/Button";
 
 export const Plants = () => {
@@ -14,6 +14,9 @@ export const Plants = () => {
                 setPlantList(await plantsList())
                 for (const plant of plantList) {
                     if(plant.condition === "Dead"){
+                        if(plantList.length === 1){
+                            await addPlant(true);
+                        }
                         await removePlant(plant.id)
                         alert(`Your ${plant.type} has died`);
                     }
