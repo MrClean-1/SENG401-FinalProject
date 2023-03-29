@@ -6,7 +6,7 @@ import { getUser, addUser} from "../Database/DatabaseMethods";
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children, userData }) => {
-    const [user, setUser] = useLocalStorage('user', userData.username);
+    const [user, setUser] = useLocalStorage('user', null);
     const navigate = useNavigate();
 
     const login = async (data) => {

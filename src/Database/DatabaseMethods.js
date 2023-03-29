@@ -1,5 +1,5 @@
 import db from './firebase_init'
-import { doc, setDoc, getDoc, getDocs, collection} from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, deleteDoc, collection} from "firebase/firestore";
 import { User, userConverter} from '../Models/UserCustomObject.js';
 import {Garden, gardenConverter} from "../Models/GardenCustomObject";
 import {Plant, plantConverter} from "../Models/PlantCustomObject.js";
@@ -52,7 +52,7 @@ const getUsername = () => {
 
 // Idk how to get value of gold w/ the given username
 export async function getGold() {
-    const ref = doc(collection(db, "gardens", getUsername()).withConverter(gardenConverter));
+    const ref = doc(db, "gardens", getUsername()).withConverter(gardenConverter);
     const docSnap = await getDoc(ref);
 
     if (docSnap.exists()) {
@@ -86,7 +86,7 @@ export async function addPost(subject, body) {
 export async function plantsList(){
     let plantList = [];
     // get the garden object
-    const garden = getGarden();
+    const garden = await getGarden();
     // gets the plant list from the garden
     if (garden == null){
         return null;
@@ -106,7 +106,7 @@ export async function plantsList(){
 }
 
 export async function addPlant(){
-    const garden = getGarden();
+    const garden = await getGarden();
     // make some checks to verify the user should be able to purchase a plant
     if(garden.plants.length < 3 && garden.gold >= 1000){
         garden.gold -=1000;
@@ -114,17 +114,44 @@ export async function addPlant(){
         const newPlant = new Plant(newPlantRef.id)
         await setDoc(newPlantRef, newPlant);
         garden.plants.push(newPlantRef.id);
+        await setGarden(garden);
     }else{
         console.log("User has too many plants already or is too poor (hehehe poor moment) ")
     }
 }
 
+export async function removePlant(plantID){
+    // we have the ID of the plant we want to remove
+    // we need to delete the plant document and remove the id from the list in the garden
+    const garden = await getGarden();
+    const index = garden.plants.indexOf(plantID);
+    if (index > -1) { // only splice array when item is found
+        garden.plants.splice(index, 1); // 2nd parameter means remove one item only
+        await deleteDoc(doc(db, "plants", plantID));
+        await setGarden(garden);
+    }else{
+        console.log("Could not find that plant to delete: " + plantID)
+    }
+}
+
 export async function waterPlants(){
-    const plantList = plantsList();
-    for(const plant of plantList){
-        plant.water()
-        const plantRef = doc(db, "plants", plant.id).withConverter(plantConverter);
-        await setDoc(plantRef, plant);
+    const plantList = await plantsList();
+    const garden = await getGarden();
+
+    const currentDate = Date.now();
+    const diffLastWatered = Math.abs(currentDate - garden.lastWatered);
+    const minutesSinceLastWatered = Math.round(diffLastWatered / (1000 * 60))
+
+    if(minutesSinceLastWatered > 120){
+        for(const plant of plantList){
+            garden.gold += plant.water()
+            const plantRef = doc(db, "plants", plant.id).withConverter(plantConverter);
+            await setDoc(plantRef, plant);
+        }
+        garden.lastWatered = Date.now()
+        await setGarden(garden);
+    }else{
+        alert(`Please wait 2 hours before re-watering your plants (it has been ${minutesSinceLastWatered} min)`)
     }
 }
 
@@ -138,4 +165,9 @@ export async function getGarden(){
         console.log("No such document! (getGarden)");
         return null;
     }
+}
+
+export async function setGarden(garden){
+    const updateGardenRef = doc(db, "gardens", getUsername()).withConverter(gardenConverter);
+    await setDoc(updateGardenRef, garden);
 }

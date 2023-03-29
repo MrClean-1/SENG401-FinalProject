@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {getGold} from "../Database/DatabaseMethods";
+import {addPlant, getGold, waterPlants} from "../Database/DatabaseMethods";
 import Button from "@mui/material/Button";
-// will have to make a setImg function in DatavbaseMethods
+import {Plants} from "./Plants";
 
 export const GardenPage = () => {
     const [gold, setGold] = useState([]);
-//    const { plantAddition } = useState([]);
-//    const [img, setImg] = useState([]);
+    const refresh = () => window.location.reload()
 
     useEffect( () => {
         async function fetchData() {
@@ -19,32 +18,19 @@ export const GardenPage = () => {
         fetchData();
     }, []);
 
-    // Need to write getImg()
-    // useEffect( () => {
-    //     async function fetchImg() {
-    //         try {
-    //             setImg(await getImg())
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     }
-    //     fetchImg();
-    // }, []);
-
     const handleAddPlant = (e) => {
         e.preventDefault();
-        // const pl = new FormData(e.currentTarget);
-        // plantAddition({
-        //
-        // });
+        addPlant().then(refresh)
     };
     const handleWater = (e) =>{
         e.preventDefault();
+        waterPlants().then(refresh);
     }
 
     return (
         <div className="panel panel-default post-body">
             <h4 className="post-editor-text"> Gold: {gold} </h4>
+            <Plants/>
             <Button className="btn btn-success post-editor-button" onClick={handleAddPlant}>
                 Add Plant
             </Button>
