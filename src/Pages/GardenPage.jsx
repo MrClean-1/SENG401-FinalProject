@@ -5,8 +5,7 @@ import {Plants} from "./Plants";
 
 export const GardenPage = () => {
     const [gold, setGold] = useState([]);
-//    const { plantAddition } = useState([]);
-//    const [img, setImg] = useState([]);
+    const refresh = () => window.location.reload()
 
     useEffect( () => {
         async function fetchData() {
@@ -19,25 +18,13 @@ export const GardenPage = () => {
         fetchData();
     }, []);
 
-    // Need to write getImg()
-    // useEffect( () => {
-    //     async function fetchImg() {
-    //         try {
-    //             setImg(await getImg())
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     }
-    //     fetchImg();
-    // }, []);
-
     const handleAddPlant = (e) => {
         e.preventDefault();
-        addPlant()
+        addPlant().then(refresh)
     };
     const handleWater = (e) =>{
         e.preventDefault();
-        waterPlants();
+        waterPlants().then(refresh);
     }
 
     return (

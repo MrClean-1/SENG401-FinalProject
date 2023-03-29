@@ -1,5 +1,5 @@
 import db from './firebase_init'
-import { doc, setDoc, getDoc, getDocs, collection} from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, deleteDoc, collection} from "firebase/firestore";
 import { User, userConverter} from '../Models/UserCustomObject.js';
 import {Garden, gardenConverter} from "../Models/GardenCustomObject";
 import {Plant, plantConverter} from "../Models/PlantCustomObject.js";
@@ -120,15 +120,39 @@ export async function addPlant(){
     }
 }
 
+export async function removePlant(plantID){
+    // we have the ID of the plant we want to remove
+    // we need to delete the plant document and remove the id from the list in the garden
+    const garden = await getGarden();
+    const index = garden.plants.indexOf(plantID);
+    if (index > -1) { // only splice array when item is found
+        garden.plants.splice(index, 1); // 2nd parameter means remove one item only
+        await deleteDoc(doc(db, "plants", plantID));
+        await setGarden(garden);
+    }else{
+        console.log("Could not find that plant to delete: " + plantID)
+    }
+}
+
 export async function waterPlants(){
     const plantList = await plantsList();
     const garden = await getGarden();
-    for(const plant of plantList){
-        garden.gold += plant.water()
-        const plantRef = doc(db, "plants", plant.id).withConverter(plantConverter);
-        await setDoc(plantRef, plant);
+
+    const currentDate = Date.now();
+    const diffLastWatered = Math.abs(currentDate - garden.lastWatered);
+    const minutesSinceLastWatered = Math.round(diffLastWatered / (1000 * 60))
+
+    if(minutesSinceLastWatered > 120){
+        for(const plant of plantList){
+            garden.gold += plant.water()
+            const plantRef = doc(db, "plants", plant.id).withConverter(plantConverter);
+            await setDoc(plantRef, plant);
+        }
+        garden.lastWatered = Date.now()
+        await setGarden(garden);
+    }else{
+        alert(`Please wait 2 hours before re-watering your plants (it has been ${minutesSinceLastWatered} min)`)
     }
-    await setGarden(garden);
 }
 
 export async function getGarden(){
