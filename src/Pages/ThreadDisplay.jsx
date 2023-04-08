@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Post from './Post';
 import PostEditor from './PostEditor';
 import {addPost, getPosts} from "../Database/DatabaseMethods";
+import {Link} from "react-router-dom";
 
 class ThreadDisplay extends Component {
 
@@ -15,7 +16,6 @@ class ThreadDisplay extends Component {
             posts: [],
         }
     }
-
 
     async componentDidMount() {
         const {updateLocalState} = this;
@@ -39,13 +39,14 @@ class ThreadDisplay extends Component {
     render() {
         return (
             <div>
-                {
-                    this.state.posts.map((post, idx) => {
-                        return (
+                <h1 style={{margin: '1em 18%'}}>Click on a post to reply</h1>
+                {this.state.posts.map((post, idx) => {
+                    return (
+                        <Link key={idx} to={`${post.documentID}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
                             <Post key={idx} post={post}/>
-                        )
-                    })
-                }
+                        </Link>
+                    )
+                })}
                 <PostEditor addPost={this.addPost}/>
             </div>
         );
