@@ -87,6 +87,7 @@ export async function addPost(subject, body) {
 }
 
 export async function getPost(postID){
+    console.log("DB methods postID: " + postID)
     const postDocumentReference = doc(db, "discussion", postID).withConverter(postConverter);
     const postDocumentSnapshot = await getDoc(postDocumentReference);
 

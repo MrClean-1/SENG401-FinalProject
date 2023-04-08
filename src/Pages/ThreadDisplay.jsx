@@ -10,14 +10,12 @@ class ThreadDisplay extends Component {
         super(props);
 
         this.addPost = this.addPost.bind(this);
-        this.clickOnPost = this.clickOnPost.bind(this);
         this.updateLocalState = this.updateLocalState.bind(this);
 
         this.state = {
             posts: [],
         }
     }
-
 
     async componentDidMount() {
         const {updateLocalState} = this;
@@ -41,15 +39,13 @@ class ThreadDisplay extends Component {
     render() {
         return (
             <div>
-                {
-                    this.state.posts.map((post, idx) => {
-                        return (
-                            <Link to={`discussion/${post.documentID}`}>
-                                <Post key={idx} post={post}/>
-                            </Link>
-                        )
-                    })
-                }
+                {this.state.posts.map((post, idx) => {
+                    return (
+                        <Link key={idx} to={`${post.documentID}`}>
+                            <Post key={idx} post={post}/>
+                        </Link>
+                    )
+                })}
                 <PostEditor addPost={this.addPost}/>
             </div>
         );
