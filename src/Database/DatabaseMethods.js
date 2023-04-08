@@ -73,14 +73,50 @@ export async function getPosts() {
         // doc.data() is never undefined for query doc snapshots
         postList.push(doc.data());
     });
+    postList.sort((post1, post2) => {
+        return post2.timeStamp - post1.timeStamp;
+    });
     return postList;
 }
 
 export async function addPost(subject, body) {
     const newPostRef = doc(collection(db, "discussion").withConverter(postConverter));
-    const newPost = new DiscussionPost(getUsername(), subject, body);
+    const newPost = new DiscussionPost(getUsername(), subject, body, newPostRef.id);
     await setDoc(newPostRef, newPost);
     return newPost;
+}
+
+export async function getPost(postID){
+    const postDocumentReference = doc(db, "discussion", postID).withConverter(postConverter);
+    const postDocumentSnapshot = await getDoc(postDocumentReference);
+
+    if (postDocumentSnapshot.exists()) {
+        // Convert to Post object
+        return postDocumentSnapshot.data();
+    } else {
+        console.log("No such post found in Database!");
+        return false;
+    }
+}
+
+export async function addReply(parentPost, body){
+    const newPostRef = doc(collection(db, "discussion", parentPost).withConverter(postConverter));
+    const newReply = new DiscussionPost(getUsername(), "", body, newPostRef.id);
+    await setDoc(newPostRef, newReply);
+    return newReply;
+}
+
+export async function getReplies(parentPost){
+    const querySnapshot = await getDocs(collection(db, "discussion", parentPost).withConverter(postConverter));
+    let replyList = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        replyList.push(doc.data());
+    });
+    replyList.sort((post1, post2) => {
+        return post2.timeStamp - post1.timeStamp;
+    });
+    return replyList;
 }
 
 export async function plantsList(){

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Post from './Post';
 import PostEditor from './PostEditor';
 import {addPost, getPosts} from "../Database/DatabaseMethods";
+import {Link} from "react-router-dom";
 
 class ThreadDisplay extends Component {
 
@@ -9,6 +10,7 @@ class ThreadDisplay extends Component {
         super(props);
 
         this.addPost = this.addPost.bind(this);
+        this.clickOnPost = this.clickOnPost.bind(this);
         this.updateLocalState = this.updateLocalState.bind(this);
 
         this.state = {
@@ -42,7 +44,9 @@ class ThreadDisplay extends Component {
                 {
                     this.state.posts.map((post, idx) => {
                         return (
-                            <Post key={idx} post={post}/>
+                            <Link to={`discussion/${post.documentID}`}>
+                                <Post key={idx} post={post}/>
+                            </Link>
                         )
                     })
                 }
