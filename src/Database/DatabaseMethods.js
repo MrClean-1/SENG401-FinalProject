@@ -100,9 +100,17 @@ export async function getPost(postID){
 }
 
 export async function addReply(parentID, body){
-    const newPostRef = doc(collection(db, "discussion", parentID, "replies").withConverter(postConverter));
-    const newReply = new DiscussionPost(getUsername(), "", body, newPostRef.id);
-    await setDoc(newPostRef, newReply);
+    const newReplyRef = doc(collection(db, "discussion", parentID, "replies").withConverter(postConverter));
+    const newReply = new DiscussionPost(getUsername(), "", body, newReplyRef.id);
+    await setDoc(newReplyRef, newReply);
+
+    let post = await getPost(parentID);
+    if(post !== false){
+        post.replies++
+        const oldPostRef = doc(db, "discussion", parentID).withConverter(postConverter);
+        await setDoc(oldPostRef, post);
+    }
+
     return newReply;
 }
 
