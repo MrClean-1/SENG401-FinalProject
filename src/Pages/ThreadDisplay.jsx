@@ -39,9 +39,10 @@ class ThreadDisplay extends Component {
     render() {
         return (
             <div>
+                <h1 style={{margin: '1em 18%'}}>Click on a post to reply</h1>
                 {this.state.posts.map((post, idx) => {
                     return (
-                        <Link key={idx} to={`${post.documentID}`}>
+                        <Link key={idx} to={`${post.documentID}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
                             <Post key={idx} post={post}/>
                         </Link>
                     )

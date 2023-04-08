@@ -1,5 +1,5 @@
 import db from './firebase_init'
-import { doc, setDoc, getDoc, getDocs, deleteDoc, collection} from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, deleteDoc, collection, QuerySnapshot} from "firebase/firestore";
 import { User, userConverter} from '../Models/UserCustomObject.js';
 import {Garden, gardenConverter} from "../Models/GardenCustomObject";
 import {Plant, plantConverter} from "../Models/PlantCustomObject.js";
@@ -87,7 +87,6 @@ export async function addPost(subject, body) {
 }
 
 export async function getPost(postID){
-    console.log("DB methods postID: " + postID)
     const postDocumentReference = doc(db, "discussion", postID).withConverter(postConverter);
     const postDocumentSnapshot = await getDoc(postDocumentReference);
 
@@ -100,22 +99,22 @@ export async function getPost(postID){
     }
 }
 
-export async function addReply(parentPost, body){
-    const newPostRef = doc(collection(db, "discussion", parentPost).withConverter(postConverter));
+export async function addReply(parentID, body){
+    const newPostRef = doc(collection(db, "discussion", parentID, "replies").withConverter(postConverter));
     const newReply = new DiscussionPost(getUsername(), "", body, newPostRef.id);
     await setDoc(newPostRef, newReply);
     return newReply;
 }
 
-export async function getReplies(parentPost){
-    const querySnapshot = await getDocs(collection(db, "discussion", parentPost).withConverter(postConverter));
+export async function getReplies(parentID){
+    const querySnapshot = await getDocs(collection(db, "discussion", parentID, "replies").withConverter(postConverter));
     let replyList = [];
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         replyList.push(doc.data());
     });
     replyList.sort((post1, post2) => {
-        return post2.timeStamp - post1.timeStamp;
+        return post1.timeStamp - post2.timeStamp;
     });
     return replyList;
 }
